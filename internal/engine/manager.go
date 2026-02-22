@@ -36,17 +36,20 @@ func (m *Manager) initEngines() {
 		proxyURL = m.config.GetProxyURL()
 	}
 
-	// 注册 Bing 引擎
+	// 注册 HTTP 版搜索引擎
 	m.RegisterEngine(NewBingEngine(proxyURL))
-	
-	// 注册 DuckDuckGo 引擎
 	m.RegisterEngine(NewDuckDuckGoEngine(proxyURL))
-
-	// 注册 Baidu 引擎
 	m.RegisterEngine(NewBaiduEngine(proxyURL))
-
-	// 注册 Sogou 引擎
 	m.RegisterEngine(NewSogouEngine(proxyURL))
+
+	// 注册浏览器版搜索引擎（如果启用）
+	if m.config.IsBrowserEnabled() {
+		headless := m.config.IsBrowserHeadless()
+		m.RegisterEngine(NewBrowserBingEngine(proxyURL, headless))
+		m.RegisterEngine(NewBrowserGoogleEngine(proxyURL, headless))
+		m.RegisterEngine(NewBrowserBaiduEngine(proxyURL, headless))
+		log.Printf("🌐 Browser engines enabled (headless=%v)", headless)
+	}
 
 	log.Printf("✅ Initialized %d search engine(s): %v", len(m.engines), m.GetEngineNames())
 }

@@ -4,7 +4,8 @@
 
 ## 功能特性
 
-- 🔍 **多引擎搜索**: 支持 Bing、DuckDuckGo 等搜索引擎
+- 🔍 **多引擎搜索**: 支持 Bing、DuckDuckGo、Baidu、Sogou、Google 等搜索引擎
+- 🌐 **浏览器引擎**: 支持使用 Chrome 无头浏览器进行搜索，有效绕过反爬虫检测
 - 🚀 **高性能**: Go 原生协程实现，内存占用低，启动快速
 - 🔌 **MCP 协议**: 完整支持 MCP 协议，兼容 StreamableHTTP、SSE 传输
 - 🌐 **HTTP 代理**: 支持配置 HTTP 代理解决网络访问限制
@@ -64,8 +65,14 @@ server:
 
 # 搜索引擎配置
 search:
+  # 可选: bing, duckduckgo, baidu, sogou, browser_bing, browser_google, browser_baidu
   default_engine: "duckduckgo"
   allowed_engines: []
+
+# 浏览器引擎配置
+browser:
+  enabled: true
+  headless: true
 
 # 代理配置
 proxy:
@@ -91,12 +98,66 @@ mcp:
 | `server.cors.origin` | string | `*` | CORS 允许的来源 |
 | `search.default_engine` | string | `duckduckgo` | 默认搜索引擎 |
 | `search.allowed_engines` | []string | `[]` | 允许的搜索引擎列表（空表示全部允许） |
+| `browser.enabled` | bool | `true` | 是否启用浏览器引擎 |
+| `browser.headless` | bool | `true` | 浏览器是否使用无头模式 |
 | `proxy.enabled` | bool | `false` | 是否启用 HTTP 代理 |
 | `proxy.url` | string | `http://127.0.0.1:7890` | 代理服务器地址 |
 | `mcp.server_name` | string | `go-web-search-mcp` | MCP 服务器名称 |
 | `mcp.server_version` | string | `1.0.0` | MCP 服务器版本 |
 | `mcp.tools.search_name` | string | `search` | 搜索工具名称（可自定义） |
 | `mcp.tools.search_description` | string | ... | 搜索工具描述（可自定义） |
+
+## 支持的搜索引擎
+
+### HTTP 引擎（轻量级）
+
+| 引擎名称 | 说明 | 状态 |
+|---------|------|------|
+| `bing` | Bing 国际版 | ✅ 稳定 |
+| `duckduckgo` | DuckDuckGo | ✅ 稳定 |
+| `baidu` | 百度搜索 | ⚠️ 可能被限流 |
+| `sogou` | 搜狗搜索（移动版） | ✅ 稳定 |
+
+### 浏览器引擎（需要 Chrome）
+
+使用 Chrome 无头浏览器进行搜索，可以有效绕过反爬虫检测：
+
+| 引擎名称 | 说明 | 状态 |
+|---------|------|------|
+| `browser_google` | Google 搜索 | ✅ 稳定 |
+| `browser_bing` | Bing 搜索 | ✅ 稳定 |
+| `browser_baidu` | 百度搜索 | ✅ 稳定 |
+
+### 浏览器引擎依赖
+
+使用浏览器引擎需要安装 Chrome 或 Chromium：
+
+**macOS:**
+```bash
+# Chrome 已安装在 /Applications/Google Chrome.app 即可
+# 或安装 Chromium
+brew install --cask chromium
+```
+
+**Linux (Ubuntu/Debian):**
+```bash
+# 安装 Chromium
+sudo apt-get update
+sudo apt-get install -y chromium-browser
+
+# 或安装 Google Chrome
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+```
+
+**Docker:**
+```dockerfile
+# 在 Dockerfile 中添加
+RUN apt-get update && apt-get install -y \
+    chromium \
+    chromium-driver \
+    && rm -rf /var/lib/apt/lists/*
+```
 
 ### 指定配置文件路径
 
@@ -274,7 +335,8 @@ go-web-search-mcp/
 
 ## TODO
 
-- [ ] 添加更多搜索引擎（百度、Google）
+- [x] 添加更多搜索引擎（百度、搜狗）
+- [x] 添加 Chrome 无头浏览器引擎支持
 - [ ] 实现文章内容抓取工具
 - [ ] 添加搜索结果缓存
 - [ ] 支持 STDIO 传输模式

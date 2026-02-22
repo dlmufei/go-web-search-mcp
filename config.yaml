@@ -13,13 +13,21 @@ server:
 
 # 搜索引擎配置
 search:
-  # 默认搜索引擎: bing, baidu, duckduckgo, google
+  # 默认搜索引擎: bing, baidu, duckduckgo, google, sogou
+  # 浏览器版引擎: browser_bing, browser_baidu, browser_google
   default_engine: "duckduckgo"
   # 允许使用的搜索引擎列表（留空表示允许所有）
   allowed_engines: []
   # allowed_engines:
   #   - duckduckgo
   #   - bing
+
+# 浏览器引擎配置（使用 Chrome 无头浏览器）
+browser:
+  # 是否启用浏览器引擎
+  enabled: true
+  # 是否使用无头模式（false 可以看到浏览器界面，用于调试）
+  headless: true
 
 # 代理配置
 proxy:

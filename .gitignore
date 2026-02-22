@@ -44,3 +44,4 @@ config.local.yml
 # Coverage
 coverage.out
 coverage.html
+go-web-search-mcp

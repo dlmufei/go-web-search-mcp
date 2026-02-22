@@ -23,6 +23,9 @@ type Config struct {
 
 	// MCP 配置
 	MCP MCPConfig `yaml:"mcp"`
+
+	// 浏览器配置
+	Browser BrowserConfig `yaml:"browser"`
 }
 
 // ServerConfig 服务器配置
@@ -66,8 +69,14 @@ type MCPToolsConfig struct {
 	SearchDescription string `yaml:"search_description"`
 }
 
+// BrowserConfig 浏览器配置
+type BrowserConfig struct {
+	Enabled  bool `yaml:"enabled"`
+	Headless bool `yaml:"headless"`
+}
+
 // ValidEngines 有效的搜索引擎列表
-var ValidEngines = []string{"bing", "baidu", "duckduckgo", "google", "sogou"}
+var ValidEngines = []string{"bing", "baidu", "duckduckgo", "google", "sogou", "browser_bing", "browser_baidu", "browser_google"}
 
 // DefaultConfig 默认配置
 var DefaultConfig = &Config{
@@ -94,6 +103,10 @@ var DefaultConfig = &Config{
 			SearchName:        "search",
 			SearchDescription: "Search the web using multiple engines (e.g., Bing, Baidu, DuckDuckGo) with no API key required. Returns structured results with title, URL, description, and source.",
 		},
+	},
+	Browser: BrowserConfig{
+		Enabled:  true,
+		Headless: true,
 	},
 }
 
@@ -352,6 +365,16 @@ func (c *Config) GetMCPSearchToolName() string {
 // GetMCPSearchToolDescription 获取 MCP 搜索工具描述
 func (c *Config) GetMCPSearchToolDescription() string {
 	return c.MCP.Tools.SearchDescription
+}
+
+// IsBrowserEnabled 是否启用浏览器引擎
+func (c *Config) IsBrowserEnabled() bool {
+	return c.Browser.Enabled
+}
+
+// IsBrowserHeadless 浏览器是否使用无头模式
+func (c *Config) IsBrowserHeadless() bool {
+	return c.Browser.Headless
 }
 
 func isValidEngine(engine string) bool {
