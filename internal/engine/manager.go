@@ -45,6 +45,9 @@ func (m *Manager) initEngines() {
 	// 注册 Baidu 引擎
 	m.RegisterEngine(NewBaiduEngine(proxyURL))
 
+	// 注册 Sogou 引擎
+	m.RegisterEngine(NewSogouEngine(proxyURL))
+
 	log.Printf("✅ Initialized %d search engine(s): %v", len(m.engines), m.GetEngineNames())
 }
 

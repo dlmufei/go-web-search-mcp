@@ -67,7 +67,7 @@ type MCPToolsConfig struct {
 }
 
 // ValidEngines 有效的搜索引擎列表
-var ValidEngines = []string{"bing", "baidu", "duckduckgo", "google"}
+var ValidEngines = []string{"bing", "baidu", "duckduckgo", "google", "sogou"}
 
 // DefaultConfig 默认配置
 var DefaultConfig = &Config{
