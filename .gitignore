@@ -45,3 +45,7 @@ config.local.yml
 coverage.out
 coverage.html
 go-web-search-mcp
+go-web-search-mcp-linux
+
+# 远程部署脚本（包含敏感信息）
+deploy_remote.sh
