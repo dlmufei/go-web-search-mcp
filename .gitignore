@@ -1,0 +1,46 @@
+# Binaries
+bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Build output
+*.out
+
+# Test binary
+*.test
+
+# Dependency directories
+vendor/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# PID files
+*.pid
+
+# Temp files
+tmp/
+temp/
+
+# Local config overrides (if needed)
+config.local.yaml
+config.local.yml
+
+# Coverage
+coverage.out
+coverage.html

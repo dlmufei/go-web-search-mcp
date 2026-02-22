@@ -1,0 +1,42 @@
+# go-web-search-mcp 配置文件
+
+# 服务器配置
+server:
+  # 监听端口
+  port: 3456
+  # 监听地址，0.0.0.0 表示所有网卡
+  host: "0.0.0.0"
+  # CORS 跨域配置
+  cors:
+    enabled: false
+    origin: "*"
+
+# 搜索引擎配置
+search:
+  # 默认搜索引擎: bing, baidu, duckduckgo, google
+  default_engine: "duckduckgo"
+  # 允许使用的搜索引擎列表（留空表示允许所有）
+  allowed_engines: []
+  # allowed_engines:
+  #   - duckduckgo
+  #   - bing
+
+# 代理配置
+proxy:
+  # 是否启用代理
+  enabled: false
+  # 代理地址
+  url: "http://127.0.0.1:7890"
+
+# MCP 协议配置
+mcp:
+  # 服务器信息（用于 MCP 初始化响应）
+  server_name: "go-web-search-mcp"
+  server_version: "1.0.0"
+  
+  # 工具名称配置（可自定义 MCP 工具名称和描述）
+  tools:
+    # 搜索工具名称 - 可自定义修改，例如: "web_search", "search_web" 等
+    search_name: "go-search"
+    # 搜索工具描述
+    search_description: "Search the web using multiple engines (e.g., Bing, Baidu, DuckDuckGo) with no API key required. Returns structured results with title, URL, description, and source."
