@@ -15,7 +15,7 @@ server:
 search:
   # 默认搜索引擎: bing, baidu, duckduckgo, google, sogou
   # 浏览器版引擎: browser_bing, browser_baidu, browser_google
-  default_engine: "duckduckgo"
+  default_engine: "sogou"
   # 允许使用的搜索引擎列表（留空表示允许所有）
   allowed_engines: []
   # allowed_engines:
@@ -47,4 +47,4 @@ mcp:
     # 搜索工具名称 - 可自定义修改，例如: "web_search", "search_web" 等
     search_name: "go-search"
     # 搜索工具描述
-    search_description: "Search the web using multiple engines (e.g., Bing, Baidu, DuckDuckGo) with no API key required. Returns structured results with title, URL, description, and source."
+    search_description: "Search the web using multiple engines (e.g., Bing, sogou, browser_bing,browser_baidu) ."
